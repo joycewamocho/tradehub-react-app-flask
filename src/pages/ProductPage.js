@@ -5,6 +5,9 @@ function ProductPage(){
         <header>
             <NavBar/>
         </header>
+        <main>
+            <h1>product page</h1>
+        </main>
         </>
         
 
