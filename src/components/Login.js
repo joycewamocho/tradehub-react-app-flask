@@ -1,7 +1,8 @@
 import React from "react";
+import NavBar from "./NavBar";
 
 function Login(){
-    
+   
 
     
     const handleLogin = (e) => {
@@ -10,17 +11,23 @@ function Login(){
         
       };
     return(
-        <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-        <div className="card p-4" style={{ width: "400px", height:"400px", color:"black"}}>
-          <h2 className="text-center mb-4">Login</h2>
-          <form onSubmit={handleLogin}>
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">Username</label>
-              <input
-                type="text"
-                id="username"
-                className="form-control"
-                placeholder="Enter your username"
+        <>
+         <header>
+            <NavBar/>
+        </header>
+
+        <main>
+            <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+            <div className="card p-4" style={{ width: "400px", height:"400px", color:"black"}}>
+            <h2 className="text-center mb-4">Login</h2>
+            <form onSubmit={handleLogin}>
+             <div className="mb-3">
+               <label htmlFor="username" className="form-label">Username</label>
+                <input
+                 type="text"
+                 id="username"
+                 className="form-control"
+                 placeholder="Enter your username"
               />
             </div>
             <div className="mb-3">
@@ -36,6 +43,8 @@ function Login(){
           </form>
         </div>
       </div>
+      </main>
+      </>
     );
 }
 
