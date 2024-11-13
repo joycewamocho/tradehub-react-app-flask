@@ -1,4 +1,16 @@
 function ProductItem({product}){
+
+  function handleAddToCart(){
+    fetch("https://my-json-server.typicode.com/joycewamocho/tradehub-react-app/cart",{
+      method:"POST",
+      headers:{
+        "Content-Type":"Application/JSON",
+      },
+      body:JSON.stringify(product)
+    })
+    alert(`${product.name} added to cart`)
+
+  }
     return(
         <li className="cardss" data-testid="product-item">
         <img src={product.image} alt={product.name} />
@@ -6,7 +18,7 @@ function ProductItem({product}){
         <p>Description</p>
         <p>Price: {product.price}</p>
         <p>contact:{product.contact}</p>
-        <button>add to cart</button>
+        <button onClick={handleAddToCart}>add to cart</button>
         
       </li>
     );

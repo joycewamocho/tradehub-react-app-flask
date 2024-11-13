@@ -1,4 +1,5 @@
 import NavBar from "../components/NavBar";
+import Cart from "../components/Cart";
 
 function CartPage(){
     return(
@@ -8,6 +9,7 @@ function CartPage(){
             </header>
             <main>
                 <h1>cart page</h1>
+                <Cart/>
             </main>
            
         </div>
