@@ -1,12 +1,16 @@
 import NavBar from "../components/NavBar";
+import ProductForm from "../components/ProductForm";
+
+
 function ProductPage(){
     return(
         <>
         <header>
             <NavBar/>
+            
         </header>
         <main>
-            <h1>product page</h1>
+            <ProductForm/>
         </main>
         </>
         
