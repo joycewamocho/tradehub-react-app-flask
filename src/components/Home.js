@@ -1,4 +1,5 @@
 import NavBar from "./NavBar";
+import Main from "./Main";
 
 function Home(){
     return(
@@ -7,7 +8,7 @@ function Home(){
                 <NavBar/>
             </header>
             <main>
-                <h1>home </h1>
+                <Main/>
             </main>
             
 

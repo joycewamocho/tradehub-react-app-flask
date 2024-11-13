@@ -4,6 +4,8 @@ import Home from "./components/Home";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/cartPage";
+import "./App.css";
+
 
 
 function App() {
@@ -27,7 +29,6 @@ function App() {
   ])
   return (
     <div className="App">
-      <h1>TradeHub</h1>
       <RouterProvider router={router}/>
     </div>
   );
