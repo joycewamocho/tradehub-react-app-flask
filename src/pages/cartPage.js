@@ -8,7 +8,6 @@ function CartPage(){
                 <NavBar/>
             </header>
             <main>
-                <h1>cart page</h1>
                 <Cart/>
             </main>
            
