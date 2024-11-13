@@ -5,7 +5,7 @@ function Main(){
     const[products,setProducts]=React.useState([])
 
     React.useEffect(()=>{
-        fetch("http://localhost:3001/products")
+        fetch("https://my-json-server.typicode.com/joycewamocho/tradehub-react-app/products")
         .then((res)=>res.json())
         .then((data)=>setProducts(data))
     },[])

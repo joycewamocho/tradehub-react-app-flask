@@ -21,7 +21,7 @@ function ProductForm() {
 
     function handleSubmit(event){
         event.preventDefault();
-        fetch("http://localhost:3001/products",{
+        fetch("https://my-json-server.typicode.com/joycewamocho/tradehub-react-app/products",{
             method:"POST",
             headers:{
                 "Content-Type":"Application/JSON",
