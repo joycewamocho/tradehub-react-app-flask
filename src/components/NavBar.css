@@ -1,0 +1,39 @@
+/* Custom styles for NavBar */
+.custom-navbar {
+    background: linear-gradient(to right, #007bff, #6610f2); /* Gradient background */
+    height: 100px; /* Increase navbar height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    padding: 0 20px;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    color: #f8f9fa !important; 
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #ffd700 !important;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff; 
+}
+
+@media (max-width: 992px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+    .nav-link {
+        font-size: 1.1rem;
+    }
+}
