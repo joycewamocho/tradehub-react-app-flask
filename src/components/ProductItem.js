@@ -1,7 +1,7 @@
 function ProductItem({product}){
 
   function handleAddToCart(){
-    fetch("https://my-json-server.typicode.com/joycewamocho/tradehub-react-app/cart",{
+    fetch("http://localhost:3001/cart",{
       method:"POST",
       headers:{
         "Content-Type":"Application/JSON",
