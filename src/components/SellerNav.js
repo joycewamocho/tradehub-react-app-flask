@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import "./NavBar.css"; // Add custom CSS styles
 import Logout from "./Logout";
+import "./NavBar.css"; // Add custom CSS styles
 
-function NavBar() {
+function SellerNavbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
             <div className="container-fluid">
-                <Link className="navbar-brand fw-bold fs-3" to="/home">
+                <Link className="navbar-brand fw-bold fs-3" to="/products">
                     <span className="text-warning">Trade</span>Hub
                 </Link>
                 <button
@@ -22,17 +22,13 @@ function NavBar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/home">
-                                Home
+
+                    <li className="nav-item">
+                            <Link className="nav-link" to="/dash">
+                                Dashboard
                             </Link>
-                        </li>
-                       
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/cart">
-                                Cart
-                            </Link>
-                        </li>
+                    </li>
+    
                         <li className="nav-item">
                             <Logout/>
                         </li>
@@ -43,4 +39,4 @@ function NavBar() {
     );
 }
 
-export default NavBar;
+export default SellerNavbar;

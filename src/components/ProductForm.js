@@ -1,5 +1,6 @@
 import "./Form.css";
 import React from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 function ProductForm() {
     const[formData,setFormData]=React.useState({
@@ -8,8 +9,21 @@ function ProductForm() {
         price:"",
         contact:"",
         image:"",
+        sellerId: uuidv4()
 
     })
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    // Set sellerId if user is logged in
+    React.useEffect(() => {
+        if (user) {
+            setFormData((prevState) => ({
+                ...prevState,
+                sellerId: user.id 
+            }));
+        }
+    }, [user]);
 
     function handleChange(event){
         setFormData({
@@ -21,7 +35,7 @@ function ProductForm() {
 
     function handleSubmit(event){
         event.preventDefault();
-        fetch("https://my-json-server.typicode.com/joycewamocho/tradehub-react-app/products",{
+        fetch("http://localhost:3001/products",{
             method:"POST",
             headers:{
                 "Content-Type":"Application/JSON",
@@ -30,11 +44,12 @@ function ProductForm() {
         })
         .then((res)=>res.json())
         .then((data)=>console.log(data))
+        setFormData("")
 
     }
     
 
-  return (
+  return ( 
     <div className="container mt-5 d-flex justify-content-center">
       <div className="col-md-8 col-lg-6">
         <h3 className="text-center mb-4">Product Information</h3>
