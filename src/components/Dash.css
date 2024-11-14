@@ -1,0 +1,82 @@
+/* Dashboard Container */
+.container {
+    max-width: 1200px;  /* Makes sure the content does not stretch too wide */
+}
+
+/* Header Styling */
+h2 {
+    font-size: 2.5rem;  /* Larger font for better visibility */
+    color: #333;  /* Dark color for contrast */
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+}
+
+/* Card Styles */
+.card {
+    transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.card:hover {
+    transform: scale(1.05);  /* Slight zoom-in effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  /* Enhanced shadow on hover */
+    background-color: #ecb6b659;
+}
+
+/* Card Image */
+.card-img-top {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+/* Product Name */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Product Description */
+.card-text {
+    font-size: 1rem;
+    color: #6c757d; /* Muted gray for description text */
+    margin-bottom: 1rem;
+}
+
+/* Price Styling */
+.card-body h6 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: brown
+}
+
+/* Button Styles */
+.btn {
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #e4924f;  /* Darker blue on hover */
+    border-color: #0056b3;
+}
+
+.btn-outline-primary {
+    border: none;
+    background-color: #b83b6fc7;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #ecb6b6;
+}
+
+/* Empty State Message */
+.col-12 p {
+    font-size: 1.2rem;
+    color: black;
+    font-style: italic;
+    padding-top: 2rem;
+}
