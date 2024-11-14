@@ -44,14 +44,15 @@
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.5rem;
-  background-color: var(--green);
-  color: brown;
+  background-color: rgb(236, 195, 195);
   border: none;
+  color: brown;
   border-radius: 4px;
   cursor: pointer;
 }
 .cardss button:hover{
   color:green;
+  background-color: rgb(126, 126, 241)
 }
 
 @media (min-width: 768px) {

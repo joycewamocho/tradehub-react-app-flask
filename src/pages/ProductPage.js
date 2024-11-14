@@ -1,13 +1,12 @@
-import NavBar from "../components/NavBar";
 import ProductForm from "../components/ProductForm";
+import SellerNavbar from "../components/SellerNav";
 
 
 function ProductPage(){
     return(
         <>
         <header>
-            <NavBar/>
-            
+        <SellerNavbar/>
         </header>
         <main>
             <ProductForm/>
