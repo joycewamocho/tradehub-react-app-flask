@@ -1,0 +1,85 @@
+{
+  "users": [
+    {
+      "id": "fb6d",
+      "name": "raph",
+      "email": "raph@123",
+      "password": "12345",
+      "role": "seller"
+    },
+    {
+      "name": "aa",
+      "email": "aa@gmail.com",
+      "password": "123",
+      "role": "Buyer",
+      "id": "MliaeWv"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Wireless Headphones",
+      "description": "High-quality wireless headphones with noise cancellation.",
+      "price": 89.99,
+      "contact": "555-1234",
+      "image": "https://images.stockcake.com/public/6/9/7/6975704e-2812-47f6-8f4f-9267dc0b0e23_large/black-wireless-headphones-stockcake.jpg",
+      "sellerId": "1"
+    },
+    {
+      "id": "2",
+      "name": "Smartphone",
+      "description": "Latest model smartphone with all the features you need.",
+      "price": 699.99,
+      "contact": "555-5678",
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+      "sellerId": "199b"
+    },
+    {
+      "id": "3",
+      "name": "Laptop",
+      "description": "A powerful laptop for gaming and professional work.",
+      "price": 1199.99,
+      "contact": "555-9101",
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+      "sellerId": "d692"
+    },
+    {
+      "id": "4",
+      "name": "Bluetooth Speaker",
+      "description": "Portable Bluetooth speaker with great sound quality.",
+      "price": 49.99,
+      "contact": "555-1122",
+      "image": "https://images.stockcake.com/public/b/f/9/bf9c96f3-1f02-4e2d-be08-f3a26d193fc3_large/outdoor-musical-picnic-stockcake.jpg",
+      "sellerId": "1"
+    },
+    {
+      "id": "5",
+      "name": "Leather Jacket",
+      "description": "Stylish black leather jacket.",
+      "price": 199.99,
+      "contact": "555-3333",
+      "image": "https://images.stockcake.com/public/0/1/3/01336bc4-3835-49dd-bd75-6772aa1f3cc6_large/leather-jacket-hanging-stockcake.jpg",
+      "sellerId": "199b"
+    },
+    {
+      "id": "6",
+      "name": "Office Desk",
+      "description": "Spacious office desk with built-in storage.",
+      "price": 299.99,
+      "contact": "555-4444",
+      "image": "https://images.stockcake.com/public/a/2/2/a227156b-ce50-4e5f-bd90-d7a651f1e32f_large/elegant-home-office-stockcake.jpg",
+      "sellerId": "d692"
+    },
+    {
+      "id": "7",
+      "name": "Dining Table",
+      "description": "Wooden dining table with 6 chairs.",
+      "price": 499.99,
+      "contact": "555-5555",
+      "image": "https://images.stockcake.com/public/0/2/b/02b9cc26-e573-48e5-9080-be959d9d0e48_large/stylish-dining-space-stockcake.jpg",
+      "sellerId": "1"
+    }
+  ],
+  "cart": [],
+  "orders": []
+}
