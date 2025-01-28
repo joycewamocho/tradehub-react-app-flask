@@ -11,6 +11,9 @@ class Role(db.Model,SerializerMixin):
     id= db.Column(db.Integer,primary_key=True)
     role= db.Column(db.String(50),nullable=False)
 
+    # relationship
+    users = db.relationship('User', back_populates="role")
+
 class User(db.Model,SerializerMixin):
     __tablename__="users"
 
@@ -19,6 +22,11 @@ class User(db.Model,SerializerMixin):
     email=db.Column(db.String(255), nullable=False, unique=True,index=True)
     password=db.Column(db.String(255), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
+    
+    # relationships
+    user_products= db.relationship('UserProduct',back_populates='user')
+    role= db.relationship('Role',back_populates="users")
+
 
 class Product(db.Model,SerializerMixin):
     __tablename__="products"
@@ -29,6 +37,9 @@ class Product(db.Model,SerializerMixin):
     price = db.Column(db.Integer,nullable=False)
     image_url = db.Column(db.String,nullable=False)
     contact= db.Column(db.String,nullable=False)
+    
+    # relationship
+    user_products = db.relationship('UserProduct', back_populates='product')
 
 class UserProduct(db.Model,SerializerMixin):
     __tablename__= "user_products"
@@ -37,6 +48,11 @@ class UserProduct(db.Model,SerializerMixin):
     user_id =db.Column(db.Integer, db.ForeignKey("users.id"))
     product_id =db.Column(db.Integer, db.ForeignKey("products.id"))
     quantity=db.Column(db.Integer,nullable=False, default=1)
+    
+    # relationships
+    user =db.relationship('User',back_populates='user_products')
+    product = db.relationship('Product', back_populates='user_products')
+    orders = db.relationship('Order', back_populates='user_product')
 
 class Order(db.Model,SerializerMixin):
     __tablename__ = 'orders'
@@ -45,4 +61,9 @@ class Order(db.Model,SerializerMixin):
     user_products_id= db.Column(db.Integer, db.ForeignKey("user_products.id"))
     total_price =db.Column(db.Float)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+    # relationship
+    user_product = db.relationship('UserProduct', back_populates="orders")
+
+    
     
