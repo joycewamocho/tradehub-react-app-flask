@@ -35,14 +35,14 @@ with app.app_context():
         name="Smartphone",
         description="Latest smartphone with advanced features.",
         price=800,
-        image_url="https://example.com/smartphone.jpg",
+        image_url="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
         contact="seller@example.com"
     )
     product3 = Product(
         name="Headphones",
         description="Noise-cancelling over-ear headphones.",
         price=150,
-        image_url="https://example.com/headphones.jpg",
+        image_url="https://images.stockcake.com/public/6/9/7/6975704e-2812-47f6-8f4f-9267dc0b0e23_large/black-wireless-headphones-stockcake.jpg",
         contact="seller@example.com"
     )
     db.session.add_all([product1, product2, product3])
