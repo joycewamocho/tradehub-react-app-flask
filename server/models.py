@@ -4,7 +4,7 @@ from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 
 metadata = MetaData()
-db= SQLAlchemy(metadata=metadata)
+db = SQLAlchemy(metadata=metadata)
 class Role(db.Model,SerializerMixin):
     __tablename__ ="roles"
 
@@ -36,7 +36,7 @@ class UserProduct(db.Model,SerializerMixin):
     id = db.Column(db.Integer,primary_key=True)
     user_id =db.Column(db.Integer, db.ForeignKey("users.id"))
     product_id =db.Column(db.Integer, db.ForeignKey("products.id"))
-    quantity=db.Column(db.Integer,nullable=Flase, default=1)
+    quantity=db.Column(db.Integer,nullable=False, default=1)
 
 class Order(db.Model,SerializerMixin):
     __tablename__ = 'orders'

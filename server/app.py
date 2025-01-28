@@ -1,4 +1,4 @@
-from flask import flask,make_response,request,jsonify
+from flask import Flask,make_response,request,jsonify
 from models import db,Role,User,Product,UserProduct,Order
 from flask_cors import CORS
 from flask_migrate import Migrate
@@ -18,3 +18,5 @@ db.init_app(app)
 api=Api(app)
 
 
+if __name__ == "__main__":
+    app.run(port=5555, debug=True)
