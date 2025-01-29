@@ -41,6 +41,8 @@ class Product(db.Model,SerializerMixin):
     # relationship
     user_products = db.relationship('UserProduct', back_populates='product')
 
+    serialize_rules =('-user_products',)
+
 class UserProduct(db.Model,SerializerMixin):
     __tablename__= "user_products"
 
@@ -53,6 +55,8 @@ class UserProduct(db.Model,SerializerMixin):
     user =db.relationship('User',back_populates='user_products')
     product = db.relationship('Product', back_populates='user_products')
     orders = db.relationship('Order', back_populates='user_product')
+
+    serialize_rules =("-product")
 
 class Order(db.Model,SerializerMixin):
     __tablename__ = 'orders'

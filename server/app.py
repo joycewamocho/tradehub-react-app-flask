@@ -17,6 +17,87 @@ migrate = Migrate(app, db)
 db.init_app(app)
 api=Api(app)
 
+class RoleResource(Resource):
+    pass
+
+class UserResource(Resource):
+    pass
+class ProductResource(Resource):
+    def get(self):
+        products =[]
+        for product in Product.query.all():
+            products.append(product.to_dict())
+        if products:
+            response= make_response(products,200)
+            return response
+        else:
+            return make_response({"message":"products Not Found,404"},404)
+
+    def post(self):
+        data = request.get_json()
+        new_product=Product(
+            name=data['name'],
+            description=data['description'],
+            price=data['price'],
+            image_url=data['image_url'],
+            contact=data['contact']
+        )
+
+        db.session.add(new_product)
+        db.session.commit()
+
+        if new_product:
+            return make_response(new_product.to_dict(),201)
+        else:
+            return make_response({'message':"Error occured"},400)
+api.add_resource(ProductResource,'/products')
+
+class ProductByID(Resource):
+    def get(self,id):
+        product = Product.query.filter(Product.id == id).first()
+        if product:
+            return make_response(product.to_dict(),200)
+        else:
+            return make_response({'message':"product not found"},404)
+
+    def patch(self,id):
+        product = Product.query.filter(Product.id == id).first()
+        data = request.get_json()
+        if product:
+            product.name =data['name']
+            product.description=data['description']
+            product.price=data['price']
+            product.image_url=data['image_url']
+            product.contact=data['contact']
+
+            db.session.commit()
+            return make_response(product.to_dict(),201)
+        else:
+            return  make_response(f"The product with id {id} was not found",404)
+
+    def delete(self,id):
+        product = Product.query.filter(Product.id == id).first()
+
+        if product:
+            db.session.delete(product)
+            db.session.commit()
+
+            body={
+                "deleted successful":True,
+                "message":"Product deleted."
+            }
+            return make_response(body,200)
+        else:
+            return make_response(f"product with id {id} not found",404)
+api.add_resource(ProductByID,'/products/<int:id>')
+
+
+
+class UserProductResource(Resource):
+    pass
+class OrderResource(Resource):
+    pass
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

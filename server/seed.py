@@ -28,7 +28,7 @@ with app.app_context():
         name="Laptop",
         description="A high-performance laptop for work and gaming.",
         price=1200,
-        image_url="https://example.com/laptop.jpg",
+        image_url="https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
         contact="seller@example.com"
     )
     product2 = Product(
