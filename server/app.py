@@ -21,7 +21,68 @@ class RoleResource(Resource):
     pass
 
 class UserResource(Resource):
-    pass
+    def get(self):
+        users=[]
+        for user in User.query.all():
+            users.append(user.to_dict())
+        if users:
+            response = make_response(users,200)
+            return response
+        else:
+            return make_response({"message":"users not found"},404)
+    def post(self):
+        data = request.get_json()
+        new_user = User(
+            username =data['username'],
+            email=data['email'],
+            password=data['password'],
+            role_id=data['role_id']
+        )
+        db.session.add(new_user)
+        db.session.commit()
+
+        if new_user:
+            return make_response(new_user.to_dict(),201)
+        else:
+            return make_response({'message': 'Error occured'},400)
+api.add_resource(UserResource,'/users')
+
+class UserByID(Resource):
+    def get(self,id):
+        user= User.query.filter(User.id == id).first()
+        if user:
+            return make_response(user.to_dict(),200)
+        else:
+            return make_response(f"user with id {id} not found",404)
+
+    def patch(self,id):
+        user=User.query.filter(User.id == id).first()
+        data= request.get_json()
+        if user:
+            user.username=data['username']
+            user.email=data['email']
+            user.password=data['password']
+            user.role_id=data['role_id']
+
+            db.session.commit()
+            return make_response(user.to_dict(),201)
+        else:
+            return make_response(f"user with id {id}, not found", 404)
+
+    def delete(self,id):
+        user= User.query.filter(User.id == id ).first()
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            
+            body={
+                "deleted successful":True,
+                "message":"user deleted."
+            }
+            return make_response(body,200)
+        else:
+            return make_response(F"user with id  {id}  was not found",404)
+api.add_resource(UserByID,'/users/<int:id>')
 class ProductResource(Resource):
     def get(self):
         products =[]

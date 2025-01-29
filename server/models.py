@@ -13,6 +13,7 @@ class Role(db.Model,SerializerMixin):
 
     # relationship
     users = db.relationship('User', back_populates="role")
+    serialize_rules =('-users')
 
 class User(db.Model,SerializerMixin):
     __tablename__="users"
@@ -26,6 +27,8 @@ class User(db.Model,SerializerMixin):
     # relationships
     user_products= db.relationship('UserProduct',back_populates='user')
     role= db.relationship('Role',back_populates="users")
+
+    serialize_rules = ('-user_products', '-role',)
 
 
 class Product(db.Model,SerializerMixin):
@@ -41,7 +44,7 @@ class Product(db.Model,SerializerMixin):
     # relationship
     user_products = db.relationship('UserProduct', back_populates='product')
 
-    serialize_rules =('-user_products',)
+    serialize_rules =('-user_products','-user')
 
 class UserProduct(db.Model,SerializerMixin):
     __tablename__= "user_products"
