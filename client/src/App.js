@@ -13,15 +13,17 @@ import SellerDash from "./components/sellerDash";
 
 
 
+
 function App() {
   const router=createBrowserRouter([
+   
     {
       path:"/",
-      element:<Login/>
+      element:<Home/>
     },
     {
-      path:"/home",
-      element:<Home/>
+      path:"/login",
+      element:<Login/>
     },
     {
       path:"/cart",

@@ -1,63 +1,80 @@
 import "./Form.css";
-import React from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ProductForm() {
-    const[formData,setFormData]=React.useState({
-        name:"",
-        description:"",
-        price:"",
-        contact:"",
-        image:"",
-        sellerId: uuidv4()
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    contact: "",
+    image_url: "",
+    seller_id: "", // Will be populated after user is fetched
+  });
 
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUser(storedUser);
+      setFormData((prevData) => ({
+        ...prevData,
+        seller_id: storedUser.id,
+      }));
+    } else {
+      navigate("/login"); // Redirect to login page if no user data
+    }
+  }, [navigate]);
+
+  function handleChange(event) {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!user) return; // Prevent submission if user is not found
+
+    const productData = { ...formData, seller_id: user.id };
+
+    fetch("/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify(productData),
     })
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    // Set sellerId if user is logged in
-    React.useEffect(() => {
-        if (user) {
-            setFormData((prevState) => ({
-                ...prevState,
-                sellerId: user.id 
-            }));
-        }
-    }, [user]);
-
-    function handleChange(event){
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Product added:", data);
         setFormData({
-            ...formData,
-            [event.target.name]:event.target.value
+          name: "",
+          description: "",
+          price: "",
+          contact: "",
+          image_url: "",
+          seller_id: user.id,
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
-        })
-    }
+  if (!user) {
+    return <div>Loading...</div>; // Show loading state while fetching user data
+  }
 
-    function handleSubmit(event){
-        event.preventDefault();
-        fetch("http://localhost:3001/products",{
-            method:"POST",
-            headers:{
-                "Content-Type":"Application/JSON",
-            },
-            body:JSON.stringify(formData)
-        })
-        .then((res)=>res.json())
-        .then((data)=>console.log(data))
-        setFormData("")
-
-    }
-    
-
-  return ( 
+  return (
     <div className="container mt-5 d-flex justify-content-center">
       <div className="col-md-8 col-lg-6">
         <h3 className="text-center mb-4">Product Information</h3>
         <form className="product-form" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Product Name
-            </label>
+            <label htmlFor="name" className="form-label">Product Name</label>
             <input
               type="text"
               className="form-control"
@@ -70,9 +87,7 @@ function ProductForm() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="description" className="form-label">
-              Product Description
-            </label>
+            <label htmlFor="description" className="form-label">Product Description</label>
             <textarea
               className="form-control"
               id="description"
@@ -85,9 +100,7 @@ function ProductForm() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="price" className="form-label">
-              Price
-            </label>
+            <label htmlFor="price" className="form-label">Price</label>
             <input
               type="number"
               className="form-control"
@@ -97,12 +110,11 @@ function ProductForm() {
               onChange={handleChange}
               placeholder="Enter price"
               required
+              min="0"
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="contact" className="form-label">
-              Contact Information
-            </label>
+            <label htmlFor="contact" className="form-label">Contact Information</label>
             <input
               type="tel"
               className="form-control"
@@ -112,18 +124,17 @@ function ProductForm() {
               onChange={handleChange}
               placeholder="Enter contact number"
               required
+              pattern="^\+?[0-9]{1,4}?[-. ]?[0-9]{1,3}[-. ]?[0-9]{1,4}[-. ]?[0-9]{1,4}$"
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="image" className="form-label">
-              Product Image URL
-            </label>
+            <label htmlFor="image" className="form-label">Product Image URL</label>
             <input
               type="url"
               className="form-control"
               id="image"
-              name="image"
-              value={formData.image}
+              name="image_url"
+              value={formData.image_url}
               onChange={handleChange}
               placeholder="Enter product image URL"
               required

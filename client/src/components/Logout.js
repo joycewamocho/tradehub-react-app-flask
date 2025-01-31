@@ -3,7 +3,7 @@ function Logout(){
     const navigate= useNavigate();
     function handleLogout(){
         localStorage.removeItem("user")
-        navigate("/")
+        navigate("/login")
     }
     return(
         <div>

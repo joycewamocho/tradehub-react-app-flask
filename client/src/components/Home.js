@@ -10,7 +10,6 @@ function Home(){
             <main>
                 <Main/>
             </main>
-            
 
         </div>
     

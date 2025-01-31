@@ -5,7 +5,7 @@ function LoginNavbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
             <div className="container-fluid">
-                <Link className="navbar-brand fw-bold fs-3" to="/">
+                <Link className="navbar-brand fw-bold fs-3" to="/login">
                     <span className="text-warning">Trade</span>Hub
                 </Link>
                 <button
@@ -21,6 +21,11 @@ function LoginNavbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
+                    <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="/">
+                                Home
+                            </Link>
+                        </li>
                        
                        
                     </ul>

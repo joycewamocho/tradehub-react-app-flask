@@ -1,6 +1,6 @@
 /* Custom styles for NavBar */
 .custom-navbar {
-    background: linear-gradient(to right, #007bff, #6610f2); /* Gradient background */
+    background: linear-gradient(to right, #d5dbe26c, #7541c9); /* Gradient background */
     height: 100px; /* Increase navbar height */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
     padding: 0 20px;

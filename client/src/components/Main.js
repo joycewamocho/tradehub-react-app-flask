@@ -8,7 +8,7 @@ function Main() {
 
   // Fetch products from API
   React.useEffect(() => {
-    fetch("http://localhost:3001/products")
+    fetch("/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);

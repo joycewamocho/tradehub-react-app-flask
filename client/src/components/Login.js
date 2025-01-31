@@ -6,24 +6,25 @@ import { Link, useNavigate } from "react-router-dom";
 function Login(){
    const[password,setPassword]=React.useState("")
    const[userName,setUserName]=React.useState("")
+  
    const navigate=useNavigate();
 
     
     const handleLogin = (e) => {
         e.preventDefault();
-        fetch("http://localhost:3001/users")
+        fetch("/users")
         .then((res)=>res.json())
         .then((users)=>{
-          const user =users.find((user)=>user.name === userName && user.password ===password)
+          const foundUser =users.find((user)=>user.username === userName && user.password ===password)
 
-          if(user){
+          if(foundUser){
             alert("login suscessful")
-            localStorage.setItem("user",JSON.stringify(user));
+            localStorage.setItem("user",JSON.stringify(foundUser));
 
             //navigate based on role
-            if(user.role.toLowerCase()=== "buyer"){
+            if(foundUser.role.role.toLowerCase()=== "buyer"){
               navigate("/buyer-dashboard")
-            }else if(user.role.toLowerCase()=== "seller"){
+            }else if(foundUser.role.role.toLowerCase()=== "seller"){
               navigate("/seller-dashboard")
             }else{
               alert("uknown role")
@@ -31,6 +32,7 @@ function Login(){
            }
            else{
             alert("invalid password or username")}
+        
         })
     
         

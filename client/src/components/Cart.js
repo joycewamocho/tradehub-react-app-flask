@@ -2,17 +2,16 @@ import React from "react";
 
 function Cart() {
   const [cartItems, setCartItems] = React.useState([]);
-  const [total, setTotal] = React.useState("0");
+  const [total, setTotal] = React.useState(0);
 
+  // Load cart items from localStorage when the component mounts
   React.useEffect(() => {
-    fetch("http://localhost:3001/cart")
-      .then((res) => res.json())
-      .then((items) => {
-        setCartItems(items);
-        calculateTotal(items);
-      });
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(storedCart);
+    calculateTotal(storedCart);
   }, []);
 
+  // Calculate the total price of the items in the cart
   const calculateTotal = (items) => {
     const totalPrice = items.reduce(
       (sum, item) => sum + parseFloat(item.price),
@@ -21,14 +20,15 @@ function Cart() {
     setTotal(totalPrice.toFixed(2));
   };
 
+  
+  // Remove an item from the cart
   const handleDelete = (id) => {
-    fetch(`http://localhost:3001/cart/${id}`, {
-      method: "DELETE",
-    }).then(() => {
-      const updatedCart = cartItems.filter((item) => item.id !== id);
-      setCartItems(updatedCart);
-      calculateTotal(updatedCart);
-    });
+    const updatedCart = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedCart);
+    calculateTotal(updatedCart);
+
+    // Save updated cart to localStorage
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   function handleBuy(item) {

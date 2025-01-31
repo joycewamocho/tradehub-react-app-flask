@@ -15,8 +15,9 @@ Trade Hub is a marketplace application where users can post products for sale, b
 
 - **React:** For structuring the components and managing state.
 - **CSS:** For styling the application using Bootstrap for responsiveness.
-- **JavaScript:** For handling user interactions, form submissions, and fetching data.
-- **JSON Server:** For simulating a db.json to handle product and user data.
+- **javascript:** For handling user interactions, form submissions, and fetching data.
+- **Flask:** For simulating a database to handle product and user data.
+- **Python:** programming language for backend
 
 ## Setup Instructions
 
@@ -24,6 +25,7 @@ Trade Hub is a marketplace application where users can post products for sale, b
 2. Install dependencies:
    ```bash
    npm install
+   pipenv install
 
 ## Author name
 JOYCE WAMOCHO
