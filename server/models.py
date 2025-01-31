@@ -53,7 +53,7 @@ class Product(db.Model,SerializerMixin):
             'description': self.description,
             'price': self.price,
             'image_url': self.image_url,
-            'contact': self.contact
+            'contact': self.contact,
         }
     
     # relationship

@@ -17,6 +17,37 @@ migrate = Migrate(app, db)
 db.init_app(app)
 api=Api(app)
 
+class SellerDashboardResource(Resource):
+    def get(self):
+        # Get and validate user_id
+        user_id = request.args.get('user_id')
+        if not user_id:
+            return make_response({"error": "User ID is required"}, 400)
+
+        try:
+            user_id = int(user_id)
+        except ValueError:
+            return make_response({"error": "Invalid user ID"}, 400)
+
+        # Fetch user
+        user = User.query.get(user_id)
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        # Fetch products efficiently using a join
+        products = (
+            db.session.query(Product)
+            .join(UserProduct, Product.id == UserProduct.product_id)
+            .filter(UserProduct.user_id == user.id)
+            .all()
+        )
+
+        # Convert products to dictionary format
+        return make_response([product.to_dict() for product in products], 200)
+
+api.add_resource(SellerDashboardResource, '/seller-dashboard')
+
+
 class RoleResource(Resource):
     def get(self):
         role_name = request.args.get('name')
@@ -119,20 +150,21 @@ class ProductResource(Resource):
         else:
             return make_response({"message": "products Not Found"}, 404)
 
+   
     def post(self):
         data = request.get_json()
 
-        # Ensure 'user_id' is included in the request data
-        user_id = data.get('user_id')
-        if not user_id:
-            return make_response({"error": "user_id is required"}, 400)
+         # Ensure 'seller_id' is included in the request data
+        seller_id = data.get('seller_id')
+        if not seller_id:
+            return make_response({"error": "seller_id is required"}, 400)
 
-        # Get the user by ID
-        user = User.query.filter_by(id=user_id).first()
+        # Check if the seller (User) exists
+        user = User.query.get(seller_id)
         if not user:
             return make_response({"error": "User not found"}, 404)
 
-        # Create the new product
+        # Create the new product (without user_id)
         new_product = Product(
             name=data['name'],
             description=data['description'],
@@ -141,16 +173,16 @@ class ProductResource(Resource):
             contact=data['contact']
         )
 
-        # Add product to the session
+        # Add the new product to the session
         db.session.add(new_product)
         db.session.commit()
 
-        # Now create the UserProduct association
-        user_product = UserProduct(user_id=user.id, product_id=new_product.id)
+        # Create the UserProduct association (for many-to-many relation)
+        user_product = UserProduct(user_id=seller_id, product_id=new_product.id)
         db.session.add(user_product)
         db.session.commit()
 
-        # Return the newly created product
+        # Return the newly created product with success response
         return make_response(new_product.to_dict(), 201)
 
 api.add_resource(ProductResource,'/products')
